@@ -8,14 +8,15 @@ class App extends Component {
       { name: 'Ryan', age: 28},
       { name: 'Lucy', age: 2},
       { name: 'Rachael', age: 23}
-    ]
+    ],
+    otherState: 'some other value'
   }
 
-  switchHandler = () => {
+  switchHandler = (newName) => {
     //Don't do this this.state.persons[0].name = 'Ryan the beautiful'
     this.setState({
       persons: [
-        { name: 'Ryan the beautiful', age: 28},
+        { name: newName, age: 28},
         { name: 'Lucy the brave', age: 2},
         { name: 'Rachael the pretty', age: 23}
       ]
@@ -27,10 +28,19 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <button onClick={this.switchHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}>My hobbies: wedding planning</Person>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My hobbies: wedding planning</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>My hobbies: wedding planning</Person>
+        <button onClick={() => this.switchHandler('Ryan the great')}>Switch Name</button>
+        <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age}
+          click={this.switchHandler.bind(this, 'Ryan')}
+        />
+          
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age}>My hobbies: wedding planning</Person>
+        <Person 
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age}>My hobbies: wedding planning</Person>
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!'))
