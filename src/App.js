@@ -48,30 +48,35 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age}
+          click={this.switchHandler.bind(this, 'Ryan')}
+          />  
+          <Person
+            changed={this.nameChangedHandler} 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age}>My hobbies: wedding planning</Person>
+          <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age}>My hobbies: wedding planning</Person>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
         <button
           style={style} 
-          onClick={() => this.togglePersonsHandler()}>Switch Name</button>
-        {
-          this.state.showPersons === true ? 
-            <div>
-              <Person 
-              name={this.state.persons[0].name} 
-              age={this.state.persons[0].age}
-              click={this.switchHandler.bind(this, 'Ryan')}
-              />  
-              <Person
-                changed={this.nameChangedHandler} 
-                name={this.state.persons[1].name} 
-                age={this.state.persons[1].age}>My hobbies: wedding planning</Person>
-              <Person 
-                name={this.state.persons[2].name} 
-                age={this.state.persons[2].age}>My hobbies: wedding planning</Person>
-              </div> : null
-          }
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        {persons}
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!'))
